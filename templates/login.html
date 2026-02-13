@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page 1 - Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{
+height:100vh;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4adede,#fddb92);
+background-size:400% 400%;animation:bg 10s infinite alternate;
+}
+@keyframes bg{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.card{
+width:350px;padding:40px;border-radius:20px;
+background:rgba(0,0,0,0.7);color:white;text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+input{
+width:100%;padding:12px;margin:15px 0;border:none;
+border-radius:10px;background:rgba(255,255,255,0.2);color:white;
+}
+button{
+width:100%;padding:12px;border:none;border-radius:10px;
+background:#ff6ec4;color:white;font-weight:bold;cursor:pointer;
+}
+a{color:#fddb92;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Study Planner Login</h2>
+<input type="text" placeholder="Username">
+<input type="password" placeholder="Password">
+<button>Login</button>
+<p><a href="register.html">Sign Up</a></p>
+</div>
+</body>
+</html>
