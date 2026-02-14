@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Subject & Topics</title>
+<style>
+select {
+    color: black;          /* text color for the dropdown */
+    background: #fddb92;   /* dropdown background */
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+select option {
+    color: black;          /* ensures the options inside are readable */
+    background: #fddb92;   /* matches dropdown background */
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body {
+    min-height: 100vh; /* allow body to grow if content overflows */
+    display: flex;
+    justify-content: center; /* horizontal centering */
+    background: linear-gradient(-45deg,#ff6ec4,#7873f5,#4adede,#fddb92);
+    background-size: 400% 400%;
+    animation: bg 10s infinite alternate;
+    padding: 20px; /* optional spacing */
+    overflow-y: auto; /* enable vertical scrolling */
+}
+@keyframes bg{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.card {
+    width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    margin-top: 20px; /* so it isn’t flush at top */
+    margin-bottom: 20px; /* extra spacing at bottom */
+}
+input, select{
+	width:100%;padding:10px;margin:10px 0;border:none;border-radius:10px;background:rgba(255,255,255,0.2);color:white;
+}
+button{
+	width:100%;padding:12px;border:none;border-radius:10px;background:#7873f5;color:white;font-weight:bold;cursor:pointer;margin-top:10px;
+}
+a{color:#fddb92;text-decoration:none;}
+.topic-block{
+	border:1px solid rgba(255,255,255,0.3);padding:10px;margin-bottom:10px;border-radius:10px;}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Add Subject & Topics</h2>
+{% if error %}
+<p style="color:#ff6ec4; margin-bottom:10px;">{{ error }}</p>
+{% endif %}
+
+<form method="POST" id="subjectForm">
+  <input type="text" name="subject_name" placeholder="Subject Name" required>
+
+  <div id="topicsContainer">
+    <div class="topic-block">
+      <input type="text" name="topic_name[]" placeholder="Topic Name" required>
+      <label>Difficulty: 
+        <select name="difficulty_level[]">
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3" selected>3</option><option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+      <label>Importance: 
+        <select name="importance[]">
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3" selected>3</option><option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+      <label>Confidence: 
+        <select name="confidence_level[]">
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3" selected>3</option><option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+	  <p>Hours Required (estimated):</p>
+		<input type="number" name="hours_required[]" placeholder="1.0" min="0.5" step="0.5" value="1.0" required>
+
+    </div>
+  </div>
+
+  <button type="button" onclick="addTopic()">+ Add Another Topic</button>
+  <button type="submit">Save Subject & Topics</button>
+  <div style="margin-top:20px;">
+    <button type="button" onclick="location.href='/dashboard'">Back to Dashboard</button>
+</div>
+</form>
+</div>
+
+<script>
+function addTopic() {
+  const container = document.getElementById('topicsContainer');
+  const block = document.createElement('div');
+  block.className = 'topic-block';
+  block.innerHTML = `
+    <input type="text" name="topic_name[]" placeholder="Topic Name" required>
+    <label>Difficulty: 
+      <select name="difficulty_level[]">
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3" selected>3</option><option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </label>
+    <label>Importance: 
+      <select name="importance[]">
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3" selected>3</option><option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </label>
+    <label>Confidence: 
+      <select name="confidence_level[]">
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3" selected>3</option><option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </label>
+    <input type="number" name="hours_required[]" placeholder="Hours Required" min="0.5" step="0.5" value="1.0" required>
+  `;
+  container.appendChild(block);
+}
+</script>
+</body>
+</html>

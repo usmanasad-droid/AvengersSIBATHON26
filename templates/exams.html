@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Exam</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{
+height:100vh;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4adede,#fddb92);
+background-size:400% 400%;animation:bg 10s infinite alternate;
+}
+@keyframes bg{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+.card{
+width:380px;padding:40px;border-radius:20px;
+background:rgba(0,0,0,0.75);color:white;text-align:center;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:12px 0;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,0.2);
+color:white;
+}
+
+select option{
+color:black;
+background:#fddb92;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#ff6ec4;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+<h2>Add Exam</h2>
+
+<form method="POST">
+  <select name="subject_id" required>
+    <option value="">Select Subject</option>
+    {% for subject in subjects %}
+      <option value="{{ subject.subject_id }}">{{ subject.subject_name }}</option>
+    {% endfor %}
+  </select>
+
+  <input type="text" name="exam_name" placeholder="Exam Name" required>
+  <input type="date" name="exam_date" required>
+
+  <button type="submit">Save Exam</button>
+  
+  <div style="margin-top:20px;">
+    <button type="button" onclick="location.href='/dashboard'">Back to Dashboard</button>
+</div>
+
+</form>
+</div>
+
+</body>
+</html>
