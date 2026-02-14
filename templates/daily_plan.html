@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Today's Plan</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{min-height:100vh;background:linear-gradient(45deg,#1e1e2f,#2c2c54);color:white;padding:24px;}
+.card{background:rgba(0,0,0,0.6);padding:20px;border-radius:12px;max-width:800px;margin:20px auto;}
+.session{background:rgba(255,255,255,0.04);padding:12px;margin:8px 0;border-radius:8px;}
+.meta{margin-bottom:12px;color:#ddd;}
+.btn{padding:10px 14px;border:none;border-radius:8px;background:#ff6ec4;color:white;cursor:pointer;margin-right:8px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>Study Plan for {{ plan.date }}</h2>
+  <div class="meta">
+    Daily study hours: {{ plan.daily_hours }} hrs
+    {% if plan.note %}
+      <div style="color:#ffcc66">{{ plan.note }}</div>
+    {% endif %}
+  </div>
+
+  {% for s in plan.sessions %}
+    <div class="session">
+      <strong>{{ s.topic_name }}</strong> — <em>{{ s.subject_name }}</em><br>
+      Duration: {{ s.duration_minutes }} minutes
+      {% if s.days_until_exam and s.days_until_exam < 9999 %}
+        • Exam in {{ s.days_until_exam }} day(s)
+      {% endif %}
+    </div>
+  {% endfor %}
+
+<div style="margin-top:16px;">
+    {% if subjects %}
+        <button class="btn" onclick="location.href='/plan/daily/save'">Save Plan (persist sessions)</button>
+    {% endif %}
+    <button class="btn" onclick="location.href='/dashboard'">Back to Dashboard</button>
+</div>
+
+</div>
+</body>
+</html>
