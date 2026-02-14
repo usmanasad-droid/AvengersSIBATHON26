@@ -14,6 +14,25 @@ button{padding:10px 20px;border:none;border-radius:8px;background:#ff6ec4;color:
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+<script>
+function markComplete(sessionId) {
+    fetch(`/session/complete/${sessionId}`, { method: 'POST' })
+    .then(res => {
+        if (res.ok) {
+            // Optionally update UI immediately
+            alert('Session marked complete!');
+            location.reload(); // refresh the weekly plan
+        } else {
+            alert('Failed to mark complete.');
+        }
+    });
+}
+</script>
+
+
+>>>>>>> e2dac0b037ba6a0b9733865e15e0a8690468602d
 <h2>Weekly Study Plan</h2>
 
 {% for day in weekly_plan %}
@@ -21,9 +40,24 @@ button{padding:10px 20px;border:none;border-radius:8px;background:#ff6ec4;color:
   <h3>{{ day.date.strftime('%A, %d %b %Y') }}</h3>
   {% if day.sessions %}
   <ul>
+<<<<<<< HEAD
     {% for s in day.sessions %}
       <li>{{ s.topic_name }} — {{ s.duration_minutes }} min</li>
     {% endfor %}
+=======
+	{% for s in day.sessions %}
+	  <li>
+		{{ s.topic_name }} — {{ s.duration_minutes }} min
+
+		{% if s.session_id %}
+		  <button onclick="markComplete({{ s.session_id }})">
+			✓ Complete
+		  </button>
+		{% endif %}
+	  </li>
+	{% endfor %}
+
+>>>>>>> e2dac0b037ba6a0b9733865e15e0a8690468602d
   </ul>
   {% else %}
   <p>No sessions scheduled.</p>
